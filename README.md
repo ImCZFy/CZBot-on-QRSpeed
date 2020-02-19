@@ -1,4 +1,5 @@
-# CZBot QRSpeed (Android运行环境)
+# CZBot QRSpeed QQ机器人 (Android运行环境)
+# 请在使用前安装QRSpeed以及QRSpeed词库 并将主人设置为自己的QQ
 ## Version 1.0 
 更新了基础框架
 ## Version 1.1
