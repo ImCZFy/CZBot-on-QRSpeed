@@ -10,3 +10,6 @@
 跳过3.0版本，修复Bug
 ## Version 5.0
 HypixelStats因个人原因已从词库中删除
+
+# 感谢支持
+- [氧气游戏工作室] (www.mcoxygen.top)
