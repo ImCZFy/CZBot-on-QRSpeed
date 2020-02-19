@@ -1,0 +1,902 @@
+&&----------------------------------------------------------
+&&
+&&CZBot QRSpeed版               
+&&                                   
+&&Made by 9gh                      
+&&                                   
+&&Last Updated on 2020/01/31   
+&&                                   
+&&---------------------------------------------------------
+
+noperm
+  -------友情提示------\r
+本指令仅限主人或者管理员使用!\r
+This command is for the use of the owner or admin only!
+
+empty
+
+[内部]全体成员
+@全体成员 %括号1%
+±at 0±
+
+禁言我
+[禁言我]      危险操作\r\r
+可用指令:\r
+禁言我 数量
+
+
+禁言我 .*
+$禁 %群号% %QQ% %参数1%$
+禁言成功!
+
+[内部]AT
+@%昵称% 
+±at %QQ%±
+
+调用 (.*)
+如果:%QQ%==%主人%
+$调用 50 %括号1%$
+返回
+如果尾
+$调用 50 noperm$
+
+检查更新|3.1.2
+A:$读 CZTeam/data/version version 获取失败$
+B:$读 CZTeam/data/newversion a 获取失败$
+如果:%A%!=%B%
+检测到可用的新版本 (%B%)\r
+您当前正在使用 %A%\r
+请及时更新!
+返回
+如果尾
+已更新到新版本 (%B%)
+
+(签到|打卡|冒泡)
+P:$读 CZTeam/data/公告 a CZTeam-3.0!$
+1:$读 CZTeam/data/积分系统/%QQ%/签到限制 a 0$
+如果:%1%==%时间dd%
+$回调 AT$\r\r
+提示： 今天%括号1%过了哦！明天再来吧！\r\r
+公告-%P%
+返回
+如果尾
+$写 CZTeam/data/积分系统/%QQ%/签到限制 a %时间dd%$
+$写 CZTeam/data/积分系统/%QQ%/积分 a %随机数1-40%$
+分:$读 CZTeam/data/积分系统/%QQ%/积分 a 0$
+A:$读 CZTeam/data/积分系统/%QQ%/个人信息/积分 a 0$
+P:$读 CZTeam/data/公告 a CZTeam-3.0!$
+$回调 AT$\r
+签到成功！\r
+获得积分：[%分%]点\r\r
+公告-%P%
+$写 CZTeam/data/积分系统/%QQ%/个人信息/积分 a [%A%+%分%]$
+
+help|菜单
+A:%时间yyyy%
+B:%时间MM%
+C:%时间dd%
+------------------------------------\r
+CZBot 主菜单\r
+------------------------------------\r\r
+①  个人信息 Profile\r
+②  机器信息 BotProfile\r
+③  后台控制 OwnerSystem\r
+④  群管系统 AdminSystem\r
+⑤  娱乐系统 Entertainment\r
+⑥  云黑系统 Blacklist\r
+⑦  权限系统 Perms\r\r
+-----------------------------\r
+%A%年 %B%月 %C%日\r
+-----------------------------\r\r
+公告-$读 CZTeam/data/公告 a CZTeam-3.0!$\r
+Made by 9gh
+
+①|个人信息|1
+------------------------------------\r
+个人信息 Profile\r
+------------------------------------\r\r
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+B:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/rank rank Default$
+如果:%A%==yes
+%时间yyyy%年%时间MM%月%时间dd%日\r\r
+机器人管理员 %昵称%\r\r
+您的称号为 %B%\r
+所在群: %GroupName%\r
+群号: %Groupid%\r\r
+您的积分:
+$读 CZTeam/data/积分系统/%QQ%/个人信息/积分 a 0$点\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+%时间yyyy%年%时间MM%月%时间dd%日\r\r
+您的称号为 %B%\r
+所在群: %GroupName%\r
+群号: %Groupid%\r\r
+您的积分:
+$读 CZTeam/data/积分系统/%QQ%/个人信息/积分 a 0$点\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+②|机器信息|2
+A:$读 CZTeam/data/5s turn off$
+S:$读 CZTeam/data/5s score 0$
+------------------------------------\r
+机器信息 BotProfile\r
+------------------------------------\r\r
+版本: $读 CZTeam/data/version version 3.0$\r
+最新版本: $读 CZTeam/data/newversion a 检查失败!$\r\r
+作者: $读 CZTeam/data/author author 橙纸Fy(2714371690)$\r
+更新内容: $读 CZTeam/data/info info 升级至CZTeam-3.0$\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+③|指令控制|3
+如果:%QQ%==%主人%
+------------------------------------\r
+OwnerSystem Help\r
+------------------------------------\r\r
+3.1 设置版本\r
+3.2 设置作者\r
+3.3 设置更新内容\r
+3.4 设置公告\r
+3.5 添加主人\r
+3.6 移除主人\r
+3.7 跨群通告\r
+3.8 插件管理\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+4.0.1 (.*)
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$回调 全体成员$%括号1%
+返回
+如果尾
+$调用 50 noperm$
+
+3.1 (.*)
+如果:%QQ%==%主人%
+$写 CZTeam/data/newversion a %括号1%$
+------------------------------------\r
+OwnerSystem\r
+------------------------------------\r\r
+成功输入!
+返回
+如果尾
+$调用 50 noperm$
+
+3.1.1|更新
+A:$读 CZTeam/data/newversion a 检查失败!$
+如果:%QQ%==%主人%
+$写 CZTeam/data/version version %A%$
+------------------------------------\r
+OwnerSystem\r
+------------------------------------\r\r
+已更新到最新版本: %A%
+返回
+如果尾
+$调用 50 noperm$
+
+3.2 (.*)
+如果:%QQ%==%主人%
+$写 CZTeam/data/author author %括号1%$
+------------------------------------\r
+OwnerSystem\r
+------------------------------------\r\r
+成功输入!
+返回
+如果尾
+$调用 50 noperm$
+
+3.3 (.*)
+如果:%QQ%==%主人%
+$写 CZTeam/data/info info %括号1%$
+------------------------------------\r
+OwnerSystem\r
+------------------------------------\r\r
+成功输入!
+返回
+如果尾
+$调用 50 noperm$
+
+3.4 (.*)
+如果:%QQ%==%主人%
+$写 CZTeam/data/公告 a %括号1%$
+------------------------------------\r
+OwnerSystem\r
+------------------------------------\r\r
+成功输入!
+返回
+如果尾
+$调用 50 noperm$
+
+3.5 @.*
+如果:%QQ%==%主人%
+$写 CZTeam/data/LuckPerms/%AT0%/perms admin yes$
+------------------------------------\r
+OwnerSystem\r
+------------------------------------\r\r
+恭喜 %AT0% 成为管理员!
+返回
+如果尾
+$调用 50 noperm$
+
+3.6 @.*
+如果:%QQ%==%主人%
+$写 CZTeam/data/LuckPerms/%AT0%/perms admin no$
+------------------------------------\r
+OwnerSystem\r
+------------------------------------\r\r
+很遗憾 %AT0% 的管理员已被撤回!
+返回
+如果尾
+$调用 50 noperm$
+
+3.7 (.*)
+该功能正在维修!
+
+3.8
+如果:%QQ%==%主人%
+------------------------------------\r
+PluginManager Help\r
+------------------------------------\r\r
+3.8 调出此菜单\r
+3.8.1 安装插件\r
+3.8.2 重载插件\r
+3.8.3 卸载插件\r
+3.8.4 插件列表\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+你没有权限执行此命令\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+3.8.1 (.*)
+W:$读 CZTeam/data/plugins list 空$
+如果:%QQ%!=%主人%
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+你没有权限执行此命令\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+W:$读 CZTeam/data/plugins list 空$
+如果:%W%==
+$写 CZTeam/data/plugins list %括号1%$
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+已成功安装 %括号1%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+如果:%W%==空
+$写 CZTeam/data/plugins list %括号1%$
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+已成功安装 %括号1%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+T:$替换 € %W%€|€¥$
+正则:%T%¥==.*(%括号1%¥).*
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+安装失败!\r
+%括号1% 已安装!\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$写 CZTeam/data/plugins list %W%|%括号1%$
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+已成功安装 %括号1%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+3.8.2 (.*)
+如果:%QQ%==%主人%
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+已成功重载 %括号1%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+你没有权限执行此命令\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+3.8.3 (.*)
+如果:%QQ%!=%主人%
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+你没有权限执行此命令\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+W:$读 CZTeam/data/plugins list 空$
+A:$正则 Э %W%Э%括号1%\|?$
+A:$正则 Э %A%Э(.*)\|?Э&1$
+如果:%A%==
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+至少保留一个插件!\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+如果:%A%==空
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+至少保留一个插件!\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$写 CZTeam/data/plugins list %A%$
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+已成功卸载 %括号1%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+3.8.4
+A:$读 CZTeam/data/plugins list 无$
+如果:%QQ%!=%主人%
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+你没有权限执行此命令\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+------------------------------------\r
+PluginManager\r
+------------------------------------\r\r
+插件列表: %A%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+3.9 .* (.*)
+如果:%QQ%==%主人%
+$申请群 %参数1% %括号1%$
+已向 %参数1% 添加入群申请。
+返回
+如果尾
+$调用 50 noperm$
+
+④|主人管理|4
+------------------------------------\r
+AdminSystem Help\r
+------------------------------------\r\r
+4.0.1 全群通报\r
+4.1 禁言\r
+4.2 踢出\r
+4.3 跨群聊天\r
+4.4 聊天记录系统\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+4.1 @.* .*
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$禁 %群号% %AT0% %参数2%$
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+您已将 %AT0% 禁言!\r
+剩余时间: %参数2%分钟\r
+处理编号: MUTE%随机数1-31415926%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+4.1.1 @.*
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$禁 %群号% %AT0% 0$
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+您已将 %AT0% 解除禁言!\r
+剩余时间: 0分钟\r
+处理编号: UNMUTE%随机数1-31415926%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+4.2 @.*
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$踢 %群号% %AT0%$
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+您已将 %AT0% 踢出本群!\r\r
+处理编号: KICK%随机数1-31415956%\r
+返回
+如果尾
+$调用 50 noperm$
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+4.3 .* (.*)
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+发送成功
+$发送 群 msg %参数1% -1 %昵称%(%QQ%)对你们说:%括号1%$
+返回
+如果尾
+$调用 50 noperm$
+
+4.4
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+4.4.1 打开群聊消息记录\r
+4.4.2 关闭群聊消息记录\r
+4.4.3 QQ号 读取消息记录\r
+4.4.3.1 AT 读取消息记录\r\r
+注意:消息记录不定期删除\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+4.4.1
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$写 CZTeam/data/logs/%群号%info status on$
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+已成功打开记录系统\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+4.4.2
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$写 CZTeam/data/logs/%群号%info status off$
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+已成功关闭记录系统\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+4.4.3 .*
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+示例: 4.4.3 QQ\r
+消息记录如下(使用|分开)\r
+图片不可被记录\r\r
+$读 CZTeam/data/logs/%群号%/%参数1% logs 空$\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+4.4.3.1 @.*
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+示例: 4.4.3.1 艾特QQ\r
+消息记录如下(使用|分开)\r
+图片不可被记录\r\r
+$读 CZTeam/data/logs/%群号%/%AT0% logs 空$\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+⑤|娱乐系统|5
+------------------------------------\r
+Entertainment Help\r
+------------------------------------\r\r
+5.1 点赞\r
+5.2.1 谁在窥屏(暂停使用)\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+5.1
+$点赞 %QQ% 10$
+------------------------------------\r
+Entertainment\r
+------------------------------------\r\r
+点赞成功
+
+⑥|云黑系统|6
+------------------------------------\r
+Blacklist Help\r
+------------------------------------\r\r
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+6.1 添加云黑(AT)\r
+6.1.1 添加云黑(QQ)\r
+6.2 删除云黑(AT)\r
+6.2.1 删除云黑(QQ)\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+6.3 查询云黑(AT)\r
+6.3.1 查询云黑(QQ)\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+6.1 @.* .* (.*)
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$写 CZTeam/data/云黑/%AT0% tof true$
+$写 CZTeam/data/云黑/%AT0% level %参数2%$
+$写 CZTeam/data/云黑/%AT0% reason %括号1%$
+------------------------------------\r
+Blacklist\r
+------------------------------------\r\r
+已将 %AT0% 添加到黑名单！\r
+黑名单用户: %AT0%\r
+云黑等级: %参数2%级\r
+被添加原因: %括号1%\r\r
+该用户因进入黑名单,使用时会受限。\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+6.1.1 .* .* (.*)
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$写 CZTeam/data/云黑/%参数1% tof true$
+$写 CZTeam/data/云黑/%参数1% level %参数2%$
+$写 CZTeam/data/云黑/%参数1% reason %括号1%$
+------------------------------------\r
+Blacklist\r
+------------------------------------\r\r
+已将 %参数1% 添加到黑名单！\r
+黑名单用户: %参数1%\r
+云黑等级: %参数2%级\r
+被添加原因: %括号1%\r\r
+该用户因进入黑名单,使用时会受限。\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+6.2 @.*
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+B:$读 CZTeam/data/云黑/%AT0% level 无$
+C:$读 CZTeam/data/云黑/%AT0% reason 无$
+如果:%A%==yes
+$写 CZTeam/data/云黑/%AT0% tof false$
+------------------------------------\r
+Blacklist\r
+------------------------------------\r\r
+已将 %AT0% 从黑名单移除！\r
+移除用户: %AT0%\r
+云黑等级: %B%级\r
+被添加原因: %C%\r\r
+该用户已从黑名单删除,使用时将不会受限。\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+6.2.1 .*
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+B:$读 CZTeam/data/云黑/%参数1% level 无$
+C:$读 CZTeam/data/云黑/%参数1% reason 无$
+如果:%A%==yes
+$写 CZTeam/data/云黑/%参数1% tof false$
+------------------------------------\r
+Blacklist\r
+------------------------------------\r\r
+已将 %参数1% 从黑名单移除！\r
+移除用户: %AT0%\r
+云黑等级: %B%级\r
+被添加原因: %C%\r\r
+该用户已从黑名单删除,使用时将不会受限。\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+6.3 @.*
+F:$读 CZTeam/data/云黑/%QQ% tof false$
+B:$读 CZTeam/data/云黑/%AT0% level 无$
+C:$读 CZTeam/data/云黑/%AT0% reason 无$
+A:$读 CZTeam/data/云黑/%AT0% tof false$
+如果:%A%==false
+------------------------------------\r
+Blacklist\r
+------------------------------------\r\r
+该用户不在黑名单中!
+返回
+如果尾
+------------------------------------\r
+Blacklist\r
+------------------------------------\r\r
+查询用户: %AT0%\r
+云黑等级: %B%级\r
+被添加原因: %C%\r\r
+该用户因进入黑名单,使用时会受限。\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+6.3.1 .*
+F:$读 CZTeam/data/云黑/%QQ% tof false$
+B:$读 CZTeam/data/云黑/%参数1% level 无$
+C:$读 CZTeam/data/云黑/%参数1% reason 无$
+A:$读 CZTeam/data/云黑/%参数1% tof false$
+如果:%F%==true
+检测到黑名单用户,已执行惩罚!
+$禁 %群号% %QQ% %随机数1-10080%$
+如果:%A%==false
+------------------------------------\r
+Blacklist\r
+------------------------------------\r\r
+该用户不在黑名单中!
+返回
+如果尾
+------------------------------------\r
+Blacklist\r
+------------------------------------\r\r
+查询用户: %参数1%\r          
+云黑等级: %B%级\r
+被添加原因: %C%\r\r
+该用户因进入黑名单,使用时会受限。\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+操你妈|你妈死了|傻逼|L
+B:$读 CZTeam/data/白名单/%QQ%/perm whitelist no$
+如果:%B%==yes
+Bypass!
+返回
+如果尾
+$禁 %群号% %QQ% %随机数1-604800%$
+
+7|⑦
+------------------------------------\r
+Perms Help\r
+------------------------------------\r\r
+7.1 添加管理员\r
+7.2 移除管理员\r
+7.3 添加权限\r
+7.4 移除权限\r
+7.5 设置称号\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+7.1 @.*
+如果:%QQ%==%主人%
+$写 CZTeam/data/LuckPerms/%群号%/%AT0%/perms admin yes$
+[LP] Set * to true for %AT0% in context %群号%
+
+7.2 @.*
+如果:%QQ%==%主人%
+$写 CZTeam/data/LuckPerms/%群号%/%AT0%/perms admin no$
+[LP] Set * to false for %AT0% in context %群号%
+
+7.3 @.* .*
+如果:%QQ%==%主人%
+$写 CZTeam/data/LuckPerms/%群号%/%AT0%/%参数2% value true$
+[LP] Set %参数2% to true for %AT0% in context %群号%
+
+7.4 @.* .*
+如果:%QQ%==%主人%
+$写 CZTeam/data/LuckPerms/%群号%/%AT0%/%参数2% value false$
+[LP] Set %参数2% to false for %AT0% in context %群号%
+
+7.5 @.* (.*)
+如果:%QQ%==%主人%
+$写 CZTeam/data/LuckPerms/%群号%/%AT0%/rank rank %括号1%$
+[LP] Set rank to %括号1% for %AT0% in context %群号%
+
+nick (.*) (.*)
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$写 CZTeam/data/Nick/%QQ%/nickname status nicked$
+$写 CZTeam/data/Nick/%QQ%/nickname rank %括号1%$
+$写 CZTeam/data/Nick/%QQ%/nickname nick %括号2%$
+You are now NICKED!
+返回
+如果尾
+$调用 50 noperm$
+
+unnick
+A:$读 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin no$
+如果:%A%==yes
+$写 CZTeam/data/Nick/%QQ%/nickname status notnicked$
+Your nick has been reset!
+返回
+如果尾
+$调用 50 noperm$
+
+getAdminPermission|getAdministrator|getAdmin|getPermission|getPerm|getAdminPermissions|getPermissions|getPerms
+A:$读 CZTeam/data/LuckPerms/permprefix/%群号% admin 无$
+如果:%Title%==%A%
+$写 CZTeam/data/LuckPerms/%群号%/%QQ%/perms admin yes$
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+成功获取本群的机器人管理员权限!\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+获取失败!\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+setAdminPrefix .*|setAdministratorPrefix .*
+如果:%QQ%==%主人%
+$写 CZTeam/data/LuckPerms/permprefix/%群号% admin %参数1%$
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+成功将 %参数1% 设置为本群的机器人管理员获取头衔!\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+AdminPrefix
+A:$读 CZTeam/data/LuckPerms/permprefix/%群号% admin 未设置$
+如果:%A%==未设置
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+本群暂未设置获取机器人管理员权限的头衔!\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+------------------------------------\r
+AdminSystem\r
+------------------------------------\r\r
+本群获取机器人管理员权限的头衔为 %A%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+写 .* .* (.*)
+如果:%QQ%==%主人%
+$写 %参数1% %参数2% %括号1%$
+将 %括号1% 写入 %参数1%—%参数2%(成功)\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+读 .* .*
+A:$读 %参数1% %参数2% 暂未设置$
+如果:%QQ%==%主人%
+%参数1% 中 %参数2% 的记录为 %A%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+$调用 50 noperm$
+
+点歌 (.*)
+json:{"app":"com.tencent.music","desc":"音乐","view":"RichInfomation","ver":"0.0.0.1","prompt":"[应用]音乐","meta":{"Music.Get":{"Music.Name":"%括号1%"}}}
+
+
+[系统]
+如果:%Status%==33
+$回调 有人进群$
+返回
+如果尾
+如果:%Status%==84
+$回调 有人申请进群$
+返回
+如果尾
+如果:%Status%==87
+$回调 有人申请进群$
+返回
+如果尾
+
+[内部]有人进群
+如果:%QQ%!=%Code%
+欢迎 %Inviteename% (%Code%)\r
+邀请者 %UinName%(%QQ%)
+返回
+如果尾
+欢迎 %UinName% (%QQ%)
+返回
+如果尾
+
+[内部]有人申请进群
+%UinName%(%QQ%)申请加入本群
+##
+##2001同意 31拒绝
+A:2001
+##
+##11同意 12拒绝
+B:11
+##
+##拒绝理由 可以留空
+C:空
+$进群审核 %群号% %QQ% %A% %B% %C%$
+
+窥屏
+$调用 5000 窥屏结果$
+a:%随机数1-100000%
+$访问 http://sqv6.com/api/kp/kp1.php?msg=%a%$
+$写 窥屏/窥屏.txt a %a%$
+
+窥屏结果
+a:$读 窥屏/窥屏.txt a 0$
+b:$访问 http://sqv6.com/api/kp/kp/%a%.txt$
+如果:%b%==0
+------------------------------------\r
+Entertainment\r
+------------------------------------\r\r
+没有人在窥屏!\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+返回
+如果尾
+------------------------------------\r
+Entertainment\r
+------------------------------------\r\r
+已找到窥屏用户:
+%b%\r\r
+公告-$读 CZTeam/data/公告 a 暂无!$\r
+Made by 9gh
+
+
+(L|l|fw|FW|sb|SB|nmsl|NMSL|nm5l|NM5L)
+@%昵称% 
+±at %QQ%±
+%括号1%
+
+(?i)[\s\S]*5s英雄榜[\s\S]*
+S:$读 CZTeam/data/5s autostart off$
+如果:%S%==on
+5s
+返回
+如果尾
+
+.*
+L:$读 CZTeam/data/logs/%群号%/%QQ% logs List$
+S:$读 CZTeam/data/logs/%群号%info status off$
+如果:%S%!=on
+$调用 50 empty$
+返回
+如果尾
+$写 CZTeam/data/logs/%群号%/%QQ% logs %L%|%参数-1%$
