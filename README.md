@@ -8,4 +8,4 @@
 ## Version 4.0
 跳过3.0版本，修复Bug
 ## Version 5.0
-In coming...
+HypixelStats因个人原因已从词库中删除
