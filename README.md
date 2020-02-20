@@ -12,4 +12,4 @@
 HypixelStats因个人原因已从词库中删除
 
 # 感谢支持
-- [氧气游戏工作室] (www.mcoxygen.top)
+- [氧气游戏工作室](www.mcoxygen.top)
